@@ -17,7 +17,7 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String home(ModelMap model){
         model.addAttribute("message", "Main page for web etl");
-        model.addAttribute("value", codeValidator.validateProductCode("12312312"));
+        model.addAttribute("value", codeValidator.validate("12312312"));
         return "home";
     }
 }

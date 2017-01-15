@@ -5,7 +5,7 @@ public class SimpleCodeValidator implements CodeValidator{
     private final int CORRECT_LENGTH  = 8;
 
     @Override
-    public boolean validateProductCode(String productCode) {
+    public boolean validate(String productCode) {
         return codeLengthIsCorrect(productCode) && codeIsNumber(productCode);
     }
 
