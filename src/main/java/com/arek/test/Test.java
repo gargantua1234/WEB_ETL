@@ -3,12 +3,11 @@ package com.arek.test;
 import com.arek.objects.Product;
 import com.arek.objects.RawData;
 import com.arek.objects.Remark;
-import com.arek.services.DataExtractor;
-import com.arek.services.DataTransformer;
-import com.arek.services.Transformer;
+import com.arek.services.extractors.DataExtractor;
+import com.arek.services.transformers.CommentTransformerImpl;
+import com.arek.services.transformers.DataTransformer;
+import com.arek.services.transformers.ProductTransformerImpl;
 import com.arek.validator.SimpleCodeValidator;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -135,46 +134,75 @@ public class Test {
 
     public static void testDataTransformer() throws Exception {
         RawData rawData;
-        Transformer transformer = new DataTransformer();
+        DataTransformer transformer = new DataTransformer();
+        transformer.setProductTransformer(new ProductTransformerImpl());
+        transformer.setCommentTransformer(new CommentTransformerImpl());
         Product product;
-        String sep = ":";
+
 
         rawData = dataExtractorTest();
         product = transformer.transform(rawData);
+
+        showProductData(product);
+        showRemarksData(product);
+        showCommentsData(product);
+        showPros(product);
+        showCons(product);
+
+
+    }
+
+
+
+    private static void showProductData(Product product){
         System.out.println("ID: "+product.getId());
         System.out.println("Type: "+product.getType());
         System.out.println("Brand: "+product.getBrand());
         System.out.println("Model: "+product.getModel());
-//        System.out.println("Remark key: value");
-//        product.getRemarks()
-//                .forEach(r->System.out.println(r.getName()+": "+r.getValue()));
         System.out.println();
+    }
+
+    private static void showRemarksData(Product product) {
+        System.out.println("Remark key: value");
+        product.getRemarks()
+                .forEach(r->System.out.println(r.getName()+": "+r.getValue()));
+        System.out.println();
+    }
+
+    private static void showCommentsData(Product product) {
+        String sep = ":";
+
         System.out.println("Comment id: Author: Date: Content: Rate: Recommended: Helpful: Unhelpful ");
-//        product.getComments()
-//                .forEach(p->System.out.println(p.getId()+sep+p.getAuthor()+
-//                            sep+p.getDate()/*+sep+p.getContent()*/+
-//                            sep+p.getRate()+sep+p.isRecommended()+sep+
-//                            p.getHelpful()+sep+p.getUnhelpful()
-//                ));
+        product.getComments()
+                .forEach(p->System.out.println(p.getId()+sep+p.getAuthor()+
+                        sep+p.getDate()/*+sep+p.getContent()*/+
+                        sep+p.getRate()+sep+p.isRecommended()+sep+
+                        p.getHelpful()+sep+p.getUnhelpful()
+                ));
 
-//        System.out.println("number of product:" +product.getComments().size());
+        System.out.println("number of comments:" +product.getComments().size());
+        System.out.println();
+    }
 
+    private static void showPros(Product product) {
         System.out.println("Pros:");
         product.getComments().forEach(
                 p-> p.getPros().forEach(
                         System.out::println
                 )
         );
+        System.out.println();
+    }
 
+    private static void showCons(Product product) {
         System.out.println("Cons:");
         product.getComments().forEach(
                 p-> p.getCons().forEach(
                         System.out::println
                 )
         );
-
-
-
+        System.out.println();
     }
+
 }
 

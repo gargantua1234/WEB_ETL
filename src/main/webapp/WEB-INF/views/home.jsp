@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Arek
@@ -12,6 +13,15 @@
 </head>
 <body>
     ${message}
-    <p>${value}</p>
+
+<form:form method="post" action="/" commandName="productCode">
+    <table>
+        <tr>
+            <td>Product code</td>
+            <td><input type="text" name="productCode"/></td>
+            <td><input type="submit" /></td>
+        </tr>
+    </table>
+</form:form>
 </body>
 </html>

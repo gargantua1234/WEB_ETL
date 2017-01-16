@@ -1,5 +1,9 @@
 package com.arek.configuration;
 
+import com.arek.services.transformers.CommentTransformer;
+import com.arek.services.transformers.CommentTransformerImpl;
+import com.arek.services.transformers.ProductTransformer;
+import com.arek.services.transformers.ProductTransformerImpl;
 import com.arek.validator.CodeValidator;
 import com.arek.validator.SimpleCodeValidator;
 import org.springframework.context.annotation.Bean;
@@ -18,4 +22,13 @@ public class RootConfig {
         return new SimpleCodeValidator();
     }
 
+    @Bean
+    public ProductTransformer productTransformer(){
+        return new ProductTransformerImpl();
+    }
+
+    @Bean
+    public CommentTransformer commentTransformer(){
+        return new CommentTransformerImpl();
+    }
 }

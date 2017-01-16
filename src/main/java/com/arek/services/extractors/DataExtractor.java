@@ -1,4 +1,4 @@
-package com.arek.services;
+package com.arek.services.extractors;
 
 
 import com.arek.objects.RawData;
@@ -14,14 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class DataExtractor implements Extractor{
-
-    private CodeValidator validator;
+public class DataExtractor implements Extractor {
 
     @Autowired
-    public void setValidator(CodeValidator validator){
-        this.validator = validator;
-    }
+    private CodeValidator validator;
+
 
     @Override
     public RawData extract(String productCode) throws Exception{
@@ -82,6 +79,10 @@ public class DataExtractor implements Extractor{
         return nextURL;
     }
 
+
+    public void setValidator(CodeValidator validator){
+        this.validator = validator;
+    }
 
 
 }

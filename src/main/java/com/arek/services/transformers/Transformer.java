@@ -1,4 +1,4 @@
-package com.arek.services;
+package com.arek.services.transformers;
 
 import com.arek.objects.Product;
 import com.arek.objects.RawData;

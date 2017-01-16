@@ -1,9 +1,7 @@
-package com.arek.services;
+package com.arek.services.transformers;
 
 import com.arek.objects.Comment;
-import com.arek.objects.Product;
 import com.arek.objects.RawData;
-import com.arek.objects.Remark;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -11,99 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DataTransformer implements Transformer {
+
+public class CommentTransformerImpl implements CommentTransformer {
+
     @Override
-    public Product transform(RawData data) {
-        Product product = null;
-        List<Comment> comments = null;
-
-        product = extractProductData(data.getNext(), data.getProductId());
-        data.reset();
-        comments = extractCommentsData(data);
-        product.setComments(comments);
-
-        return product;
-    }
-
-    private Product extractProductData(Element htmlSnippet, int productId){
-        Product product = new Product();
-        String brand = getBrand(htmlSnippet);
-
-        product.setId(productId);
-        product.setType(getType(htmlSnippet));
-        product.setBrand(brand);
-        product.setModel(getModel(htmlSnippet, brand));
-        product.setRemarks(getRemarks(htmlSnippet));
-
-        return product;
-    }
-
-    private String getType(Element root){
-        String type = root
-                .select(".breadcrumb")
-                .last()
-                .select("a")
-                .select("span")
-                .text();
-
-        return type;
-    }
-
-    private String getBrand(Element root) {
-        String brand = root
-                .select(".product-shop")
-                .attr("data-brand");
-
-        return brand;
-    }
-
-    private String getModel(Element root, String brand){
-        String model = root
-                .select(".js_searchInGoogleTooltip")
-                .first()
-                .text();
-        model = model
-                .replaceAll("(?i)"+brand, "")
-                .trim();
-
-        return model;
-    }
-
-
-    private List<Remark> getRemarks(Element root) {
-        List<Remark> remarks = new ArrayList<>();
-        Elements rawRemarks = root
-                .select("#productTechSpecs")
-                .select(".specs-group")
-                .select("tr");
-        Remark remark;
-
-        for(Element element: rawRemarks){
-            remark = new Remark();
-            String name = element
-                    .select("th")
-                    .text();
-
-            String value = element
-                    .select("td")
-                    .text();
-
-            remark.setName(name);
-            remark.setValue(value);
-            remarks.add(remark);
-        }
-
-        return remarks;
-    }
-
-
-    private List<Comment> extractCommentsData(RawData data) {
+    public List<Comment> transformToComments(RawData rawData) {
         List<Comment> comments = new ArrayList<>();
         List<Comment> tmpComments;
         Element page;
 
-        while(data.hasNext()){
-            page = data.getNext();
+        while(rawData.hasNext()){
+            page = rawData.getNext();
             tmpComments = getComments(page);
             comments.addAll(tmpComments);
         }
@@ -216,16 +132,12 @@ public class DataTransformer implements Transformer {
                 .select(type)
                 .select("li");
 
-        result.addAll(allElements.stream().map(Element::text).collect(Collectors.toList()));
+        result.addAll(allElements
+                .stream()
+                .map(Element::text)
+                .collect(Collectors.toList())
+        );
 
         return result;
     }
-
-
-
-    //method extracting data about product
-    //method extracting data about remarks
-        //returning list of remarks
-    //method extracting data about comments
-        // method will return list of comments
 }

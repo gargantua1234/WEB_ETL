@@ -1,4 +1,4 @@
-package com.arek.services;
+package com.arek.services.extractors;
 
 
 import com.arek.objects.RawData;
