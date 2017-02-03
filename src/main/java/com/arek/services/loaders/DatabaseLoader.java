@@ -35,7 +35,7 @@ public class DatabaseLoader implements Loader {
 
     private Product getEquivalentFromDatabase(Product product){
         int productId = product.getId();
-        return productService.findByIdProductWithComments(productId);
+        return productService.findProductByIdWithComments(productId);
     }
 
     private void updateInDatabase(Product product, Product equivalent) {

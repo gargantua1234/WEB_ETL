@@ -49,10 +49,6 @@ public class DataExtractor implements Extractor {
                 .timeout(10000)
                 .get();
 
-//        Element body = document
-//                .select("#body")
-//                .first();
-
         return document.select("#body")
                 .first();
     }

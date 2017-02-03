@@ -35,7 +35,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findByIdProductWithComments(int id) {
-        return dao.findByIdProductWithComments(id);
+    public Product findProductByIdWithComments(int id) {
+        return dao.findProductByIdWithComments(id);
+    }
+
+    @Override
+    public Product findProductById(int id) {
+        return dao.findProductById(id);
+    }
+
+    @Override
+    public void deleteProductById(int id) {
+        dao.deleteProductById(id);
+    }
+
+    @Override
+    public Product findProductByIdFull(int id) {
+        return dao.findProductByIdFull(id);
     }
 }

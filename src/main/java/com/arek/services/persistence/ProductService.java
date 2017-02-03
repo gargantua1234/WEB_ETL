@@ -12,5 +12,8 @@ public interface ProductService {
     List<Product> findAllProducts();
     void updateProduct(Product product);
     void saveProduct(Product product);
-    Product findByIdProductWithComments(int id);
+    Product findProductByIdWithComments(int id);
+    Product findProductById(int id);
+    void deleteProductById(int id);
+    Product findProductByIdFull(int id);
 }

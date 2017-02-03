@@ -82,12 +82,12 @@
                         <td>${comment.unhelpful}</td>
                         <td>
                             <c:forEach items="${comment.pros}" var="pro">
-                                ${pro}&#10;&#13;
+                                ${pro}<br/>
                             </c:forEach>
                         </td>
                         <td>
                             <c:forEach items="${comment.cons}" var="con">
-                                ${con}&#10;&#13;
+                                ${con}<br/>
                             </c:forEach>
                         </td>
                     </tr>
