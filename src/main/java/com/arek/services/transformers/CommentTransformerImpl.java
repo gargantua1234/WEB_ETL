@@ -1,7 +1,7 @@
 package com.arek.services.transformers;
 
-import com.arek.objects.Comment;
-import com.arek.objects.RawData;
+import com.arek.models.Comment;
+import com.arek.models.RawData;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 

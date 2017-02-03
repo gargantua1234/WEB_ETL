@@ -1,7 +1,7 @@
 package com.arek.services.transformers;
 
-import com.arek.objects.Product;
-import com.arek.objects.Remark;
+import com.arek.models.Product;
+import com.arek.models.Remark;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 

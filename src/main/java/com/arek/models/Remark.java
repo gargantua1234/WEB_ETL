@@ -1,10 +1,17 @@
-package com.arek.objects;
+package com.arek.models;
+
+import javax.persistence.*;
 
 /**
  * Created by Arek on 09.01.2017.
  */
+
+@Entity
+@Table
 public class Remark {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String value;

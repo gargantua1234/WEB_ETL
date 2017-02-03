@@ -1,7 +1,6 @@
-package com.arek.objects;
+package com.arek.models;
 
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.util.List;
 

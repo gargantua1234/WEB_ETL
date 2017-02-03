@@ -1,22 +1,33 @@
-package com.arek.objects;
+package com.arek.models;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by Arek on 09.01.2017.
  */
+
+@Entity
+@Table
 public class Comment {
-
-
+    @Id
     private long id;
     private String author = "anonymous";
     private String date;
+
+    @Column(columnDefinition = "text")
     private String content;
     private float rate;
     private boolean recommended;
     private int helpful;
     private int unhelpful;
+
+    @ElementCollection
+    @CollectionTable(name = "pros", joinColumns = @JoinColumn(name="comment_id"))
     private List<String> pros;
+
+    @ElementCollection
+    @CollectionTable(name = "cons", joinColumns = @JoinColumn(name="comment_id"))
     private List<String> cons;
 
     public long getId() {
@@ -97,5 +108,25 @@ public class Comment {
 
     public void setCons(List<String> cons) {
         this.cons = cons;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if(object == null)
+            return false;
+        if(object == this)
+            return true;
+        if(object instanceof Comment){
+            Comment comment = (Comment) object;
+            if(comment.getId() == this.getId())
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(this.getId());
     }
 }

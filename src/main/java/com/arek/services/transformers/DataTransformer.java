@@ -1,14 +1,15 @@
 package com.arek.services.transformers;
 
-import com.arek.objects.Comment;
-import com.arek.objects.Product;
-import com.arek.objects.RawData;
+import com.arek.models.Comment;
+import com.arek.models.Product;
+import com.arek.models.RawData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class DataTransformer implements Transformer {
 
     @Autowired
@@ -29,15 +30,6 @@ public class DataTransformer implements Transformer {
         product.setComments(comments);
 
         return product;
-    }
-
-    //// TODO: 16.01.2017 delete them if wont be necessary  
-    public void setProductTransformer(ProductTransformer prTrans){
-        this.productTransformer = prTrans;
-    }
-
-    public void setCommentTransformer(CommentTransformer comTrans){
-        this.commentTransformer = comTrans;
     }
 
 }

@@ -1,19 +1,20 @@
 package com.arek.services.extractors;
 
 
-import com.arek.objects.RawData;
+import com.arek.models.RawData;
 import com.arek.validator.CodeValidator;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class DataExtractor implements Extractor {
 
     @Autowired
@@ -48,11 +49,12 @@ public class DataExtractor implements Extractor {
                 .timeout(10000)
                 .get();
 
-        Element body = document
-                .select("#body")
-                .first();
+//        Element body = document
+//                .select("#body")
+//                .first();
 
-        return body;
+        return document.select("#body")
+                .first();
     }
 
 
@@ -78,11 +80,5 @@ public class DataExtractor implements Extractor {
 
         return nextURL;
     }
-
-
-    public void setValidator(CodeValidator validator){
-        this.validator = validator;
-    }
-
 
 }

@@ -1,6 +1,6 @@
 package com.arek.services.transformers;
 
-import com.arek.objects.Product;
+import com.arek.models.Product;
 import org.jsoup.nodes.Element;
 
 /**
